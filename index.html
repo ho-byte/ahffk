@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스마트 점수판</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+    <style>
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .animated-bg {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+    </style>
+</head>
+<body class="animated-bg min-h-screen flex items-center justify-center">
+    <div class="glass-effect p-8 rounded-lg w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center mb-6 text-white">스마트 점수판</h1>
+        <div class="flex justify-around mb-8">
+            <div class="text-center">
+                <h2 class="text-xl font-semibold mb-2 text-blue-300">팀 A</h2>
+                <div class="text-5xl font-bold mb-4 text-white" id="scoreA">0</div>
+                <div>
+                    <button onclick="updateScore('A', 1)" class="bg-green-500 text-white p-2 rounded-full mr-2 hover:bg-green-600 transition duration-200 hover:scale-110">
+                        <i data-feather="plus"></i>
+                    </button>
+                    <button onclick="updateScore('A', -1)" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition duration-200 hover:scale-110">
+                        <i data-feather="minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="text-center">
+                <h2 class="text-xl font-semibold mb-2 text-red-300">팀 B</h2>
+                <div class="text-5xl font-bold mb-4 text-white" id="scoreB">0</div>
+                <div>
+                    <button onclick="updateScore('B', 1)" class="bg-green-500 text-white p-2 rounded-full mr-2 hover:bg-green-600 transition duration-200 hover:scale-110">
+                        <i data-feather="plus"></i>
+                    </button>
+                    <button onclick="updateScore('B', -1)" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition duration-200 hover:scale-110">
+                        <i data-feather="minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button onclick="resetScores()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition duration-200 hover:scale-105">
+                점수 초기화
+            </button>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+
+        let scoreA = 0;
+        let scoreB = 0;
+
+        function updateScore(team, change) {
+            if (team === 'A') {
+                scoreA += change;
+                document.getElementById('scoreA').textContent = scoreA;
+            } else {
+                scoreB += change;
+                document.getElementById('scoreB').textContent = scoreB;
+            }
+        }
+
+        function resetScores() {
+            scoreA = 0;
+            scoreB = 0;
+            document.getElementById('scoreA').textContent = scoreA;
+            document.getElementById('scoreB').textContent = scoreB;
+        }
+    </script>
+</body>
+</html>
